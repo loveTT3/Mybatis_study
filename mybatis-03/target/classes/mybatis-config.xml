@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration  核心配置文件-->
+<configuration>
+    <!--引入外部配置文件-->
+    <properties resource="db.properties"/>
+    <!--        <property name="username" value="dev_user"/>-->
+    <!--        <property name="password" value="F2Fa3!33TYyg"/>-->
+    <!--    </properties>-->
+
+    <!--可以给实体类起别名-->
+    <typeAliases>
+        <!--        <typeAlias alias="User" type="com.yang.pojo.User"/>-->
+        <package name="com.yang.pojo"/>
+
+    </typeAliases>
+
+    <environments default="development">
+        <!--可以写多套配置环境，但是只能允许运行一个-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url"
+                          value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <!--                useSSL=true&amp;characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT-->
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--映射器-->
+    <mappers>
+        <mapper resource="com/yang/dao/UserMapper.xml"/>
+<!--        <mapper class="com.yang.dao.UserMapper"/>-->
+    </mappers>
+</configuration>
